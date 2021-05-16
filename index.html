@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		<title>地图板块</title>
+		<link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
+		<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=您申请的key值"></script>
+		<script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+	</head>
+	<body>
+		<div id="container"></div>
+		<script type="text/javascript">
+		    //初始化地图对象，加载地图
+		var map = new AMap.Map("container", {resizeEnable: true,zoom: 6});
+		    var lnglats = [
+		        [106.238496,38.492462],
+		        [111.685964,40.826225],
+				[103.841032,36.049115],
+				[107.149943,34.375192],
+				[101.784554,36.621181],
+				[109.503299,34.501271],
+				[111.000627,35.025643]
+		    ];
+			var contents = [
+				"<h2>苏峪口滑雪场小镇</h2>&emsp;&emsp;滑雪场设有老少皆宜的雪圈道(平坡直滑道、U型雪浪道、S型旋转道)，配置专用的传送带，还有隔离设置的亲子戏雪区，安全放心，与其他区域互不影响.<a href=''><img src='img/yinchuansnow.gif' width='170px'></a>",
+				"<h2>新城区保合少镇水磨运动休闲小镇</h2>&emsp;&emsp;主要有水磨村北的战国时期赵长城和 “当路塞”关口遗址,什字村南的“虎头夕照”。此外还有近年建成的太伟高尔夫球场、苁蓉山庄、小井沟生态园等驻村企业景点以及政府投资建成的大青山国家登山健身步道。<a href=''><img src='img/huhaote.gif' width='170px'></a>",
+			];
+		    var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
+		    for (var i = 0, marker; i < lnglats.length; i++) {
+		        var marker = new AMap.Marker({
+		            position: lnglats[i],
+		            map: map
+		        });
+		        marker.content = contents[i];
+		        marker.on('click', markerClick);
+		        marker.emit('click', {target: marker});
+		    }
+		    function markerClick(e) {
+		        infoWindow.setContent(e.target.content);
+		        infoWindow.open(map, e.target.getPosition());
+		    }
+			</script>
+	</body>
+</html>
